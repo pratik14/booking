@@ -1,0 +1,35 @@
+%a.btn.btn-success#checkout{"data-toggle" => "modal", :href => "#customerInfo", :role => "button"}
+  %i.icon-shopping-cart.icon-large
+    Checkout
+#customerInfo.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Customer Info
+  .modal-body
+    = form_for :book, url: booking_index_path, remote: true  do |f|
+      %label Name
+      = f.text_field :name
+      = f.hidden_field :seat_number
+      %button.btn.btn-primary#book Book
+      = image_tag 'spinner.gif', id: :spinner, hidden: true
+  .modal-footer
+    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
+
+#customerInfo.hidden
+  %h4 Heading
+.bs-docs-grid
+  .row-fluid.show-grid
+    - @seat.each do |s|
+      .span1{id: s.number, class: s.status}= s.number
+  .row-fluid.show-grid
+    .span4 4
+    .span4 4
+    .span4 4
+  .row-fluid.show-grid
+    .span4 4
+    .span8 8
+  .row-fluid.show-grid
+    .span6 6
+    .span6 6
+  .row-fluid.show-grid
+    .span12 12
