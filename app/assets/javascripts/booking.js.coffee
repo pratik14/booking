@@ -2,11 +2,16 @@ jQuery ->
   $('.open').click ->
     $(this).toggleClass('hold')
   
-  $('#checkout').click ->
-    seat_no = $.map $(".hold"), (seat) ->
-            seat.id
-    $('#book_seat_number').val(seat_no)
-  
+  $('#checkout').click (e) ->
+    selected = $('.hold')
+    if selected.length > 0
+      seat_no = $.map selected, (seat) ->
+                  seat.id
+      $('#book_seat_number').val(seat_no)
+    else
+      alert('Please select seat to continue!!')
+      false
+
   $('#book').click ->
     $('#book').hide();
     $('#spinner').show();

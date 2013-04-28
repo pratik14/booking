@@ -13,5 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require websocket_rails/main
 //= require booking
-//= require_tree .
+//= require websocket 
+
