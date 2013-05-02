@@ -12,7 +12,6 @@
 
 body {
   position: relative;
-  padding-top: 40px;
 }
 
 /* Code in headings */
@@ -1066,3 +1065,7 @@ form.bs-docs-example {
   }
 }
 
+#list {
+  max-height: 150px;
+  overflow: auto;
+}
