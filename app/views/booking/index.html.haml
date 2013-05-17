@@ -36,7 +36,7 @@
       %h4.nav-header Users List
       %ul.nav.nav-list#user_list
         - @booked_seats.each do |s|
-          %li= "#{s[1]} booked seat no. #{s[0]}"
+          %li{class: 'label label-success'}= "#{s[1]} booked seat no. #{s[0]}"
   .span9
     = bootstrap_flash
     = yield(:customer_form)

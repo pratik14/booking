@@ -5,7 +5,7 @@ jQuery ->
 
   channel.bind "change_seat_color", (data) ->
     $user_list = $('#user_list')
-    new_option = ('<li>'+data[1]+ ' booked seat no.'+ data[0]+'</li>')
+    new_option = ('<li class= "label label-success">'+data[1]+ ' booked seat no.'+ data[0]+'</li>')
     
     $('#' + data[0]).removeClass('open hold').addClass('booked') 
     
