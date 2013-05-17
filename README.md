@@ -1,4 +1,12 @@
-booking
-=======
+Instruction and Usage
+---------------------
 
-Real time notification using websockets of theater seats while booking
+1. Clone the git repo
+2. Run the bundle command inside the directory
+3. Run the following command
+    rake db:create
+    rake db:migrate
+    rake db:seed
+4. Fire up the web server thin start
+5. Browse to http://localhost:3000 or whatever port you started thin on.
+

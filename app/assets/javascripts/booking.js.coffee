@@ -1,6 +1,7 @@
 jQuery ->
   $('.open').click ->
-    $(this).toggleClass('hold')
+    url =  '/booking/' + this.id + '/hold'
+    $.get(url)
   
   $('#checkout').click (e) ->
     selected = $('.hold')
@@ -16,4 +17,3 @@ jQuery ->
     $('#book').hide();
     $('#spinner').show();
     true
-  

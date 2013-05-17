@@ -13,4 +13,12 @@ class BookingController < ApplicationController
       WebsocketRails[:seat_state].trigger(:change_seat_color, [seat.number, user.name])
     end
   end
+
+  def hold
+    seat = Seat.find_by_number(params[:booking_id])
+    seat_state = seat.status == 'open' ? 'hold' : 'open' 
+    seat.update_attribute(:status, seat_state)
+    WebsocketRails[:seat_state].trigger(:hold_seat, [seat.number, seat_state])
+    render nothing: true
+  end
 end

@@ -33,8 +33,8 @@
 .row-fluid
   .span3
     .well.sidebar-nav#list
+      %h4.nav-header Users List
       %ul.nav.nav-list#user_list
-        %li.nav-header Users List
         - @booked_seats.each do |s|
           %li= "#{s[1]} booked seat no. #{s[0]}"
   .span9
@@ -42,4 +42,7 @@
     = yield(:customer_form)
     = yield(:flash)
     = yield(:seat_arrangement)
+  
+  :javascript
+    var request_url = "#{request.host}:3000/websocket"
 

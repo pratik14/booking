@@ -1,6 +1,8 @@
 Booking::Application.routes.draw do
 
-  resources :booking
+  resources :booking do
+    get :hold
+  end
   root :to => 'booking#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
