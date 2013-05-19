@@ -1,8 +1,4 @@
 jQuery ->
-  $('.open').click ->
-    url =  '/booking/' + this.id + '/hold'
-    $.get(url)
-  
   $('#checkout').click (e) ->
     selected = $('.hold')
     if selected.length > 0

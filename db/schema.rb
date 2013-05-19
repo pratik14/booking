@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20130428111519) do
 
   create_table "users", :force => true do |t|
     t.string   "name"
+    t.integer  "client_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

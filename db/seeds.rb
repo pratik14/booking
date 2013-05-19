@@ -6,5 +6,5 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 50.times do |i|
-  Seat.create(:number => i, status: 'open')
+  Seat.create(:number => i + 1, status: 'open')
 end

@@ -44,5 +44,5 @@
     = yield(:seat_arrangement)
   
   :javascript
-    var request_url = "#{request.host}:3000/websocket"
+    window.chatController = new Booking.Controller("#{request.host}:#{request.port}/websocket",true);
 

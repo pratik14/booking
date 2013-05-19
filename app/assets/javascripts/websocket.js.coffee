@@ -1,21 +1,35 @@
-jQuery ->
-  dispatcher = new WebSocketRails(request_url)
+window.Booking = {}
 
-  channel = dispatcher.subscribe("seat_state")
+class Booking.User
 
-  channel.bind "change_seat_color", (data) ->
-    $user_list = $('#user_list')
-    new_option = ('<li>'+data[1]+ ' booked seat no.'+ data[0]+'</li>')
-    
-    $('#' + data[0]).removeClass('open hold').addClass('booked') 
-    
-    $user_list.prepend(new_option)
-    
-    $('#flash').html('<div class="alert"><button type="button" class="close" data-dismiss="alert">&times;</button>' + 'Seat no ' + data[0] + ' is Booked. Hurry Up!!</div>')
+  constructor: (@user_name,@full_name) ->
 
+  serialize: =>
+    {
+      user_name: @user_name
+      full_name: @full_name
+    }
+
+class Booking.Controller
+
+  constructor: (url,useWebSockets) ->
+    @dispatcher = new WebSocketRails(url,useWebSockets)
+    @dispatcher.on_open = @createGuestUser
+
+  createGuestUser: =>
+    @user = new Booking.User('Guest','Guest User')
+    @dispatcher.trigger 'new_user', @user.serialize()
+    @bindEvents()
+
+  bindEvents: =>
+    @dispatcher.bind 'update_seat_status', @updateSeatStatus
+    $('.open').click @holdSeat
+
+  holdSeat: (event) =>
+    event.preventDefault()
+    seat_id = event.target.id
+    @dispatcher.trigger 'hold_seat', {id: seat_id}
   
-  channel.bind "hold_seat", (data) ->
-    $('#' + data[0]).removeClass('open hold').addClass(data[1]) 
-
-
+  updateSeatStatus: (message) =>
+    $('#' + message['number']).removeClass('open hold').addClass(message['state']) 
 
