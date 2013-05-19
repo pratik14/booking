@@ -2,7 +2,7 @@ class BookingController < ApplicationController
 
   def index
     @seat = Seat.all
-    @booked_seats = Seat.where(:status => 'booked').collect{|s| [s.number, s.user.name]}
+    @booked_seats = Seat.where(:status => 'booked').order('created_at DESC').collect{|s| [s.number, s.user.name]}
   end
 
   def create
