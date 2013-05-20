@@ -31,4 +31,5 @@ end
 WebsocketRails::EventMap.describe do
   subscribe :new_user, to: UserController, with_method: :new_user
   subscribe :hold_seat, to: UserController, with_method: :hold_seat
+  subscribe :release_seat, to: UserController, with_method: :release_seat
 end

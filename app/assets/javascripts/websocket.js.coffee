@@ -23,13 +23,31 @@ class Booking.Controller
 
   bindEvents: =>
     @dispatcher.bind 'update_seat_status', @updateSeatStatus
+    @dispatcher.bind 'unhold_seat', @unholdSeat
     $('.open').click @holdSeat
+    $("#user_list").on "click", ".close", @releaseSeat
+
 
   holdSeat: (event) =>
-    event.preventDefault()
     seat_id = event.target.id
     @dispatcher.trigger 'hold_seat', {id: seat_id}
+
+  releaseSeat: (event) =>
+    seat_id = event.target.id
+    @dispatcher.trigger 'release_seat', {id: seat_id}
   
   updateSeatStatus: (message) =>
-    $('#' + message['number']).removeClass('open hold').addClass(message['state']) 
+    seat_number = message['number']
+    $seat = $('#' + seat_number)
+    $seat.removeClass('open hold').addClass(message['state']) 
+    $seat.unbind('click');
+    button = '<span class="badge white"><button class="close" id=button_'+seat_number+'>&times;</button></span>'
+    li = '<li class="label" id=li_' + seat_number + '>Seat number ' + seat_number + ' on hold' + button + '</li><br>'
+    $('#user_list').append(li)
 
+
+  unholdSeat: (message) =>
+    seat_number = message['number']
+    $seat = $('#' + seat_number)
+    $seat.removeClass('open hold').addClass(message['state']) 
+    $('#li_' + seat_number).remove();
